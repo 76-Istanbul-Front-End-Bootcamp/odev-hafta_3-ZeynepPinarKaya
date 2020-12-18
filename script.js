@@ -15,11 +15,12 @@ class Animal {
     let petsTable = document.getElementById("petsTable");
     let petTR = document.createElement("tr");
     petTR.className="petRows";
+    petTR.onclick = this.showImage.bind(this);
+
 
     let petNameTD = document.createElement("td");
     petNameTD.textContent = this.name;
     petTR.appendChild(petNameTD);
-  
 
     let petLegsTD = document.createElement("td");
     petLegsTD.textContent = this.legs;
@@ -37,13 +38,12 @@ class Animal {
 
   showImage() {
     let imageShower = document.getElementById("imageWrapper");
+    imageShower.innerHTML=null;
     let imageElement = document.createElement("img");
 
     imageElement.src="images/"+ this.image +".jpg"; 
     imageShower.appendChild(imageElement);
     imageElement.style.width = "100%";
-    // todo create image element +
-    // imageShower.appendChild(image element); +
   }
 }
 

@@ -1,4 +1,5 @@
-.petRows :hover{
+.petRows:hover td{
   background: darkcyan;
   color: beige;
+  cursor: pointer;
 }
