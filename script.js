@@ -6,6 +6,7 @@ class Animal {
     this.actionSoundName = actionSoundName;
     this.image = image;
   }
+
   action() {
     document.getElementById(this.actionSoundName).play();
   }
@@ -13,10 +14,12 @@ class Animal {
   putInTheDocument() {
     let petsTable = document.getElementById("petsTable");
     let petTR = document.createElement("tr");
+    petTR.className="petRows";
 
     let petNameTD = document.createElement("td");
     petNameTD.textContent = this.name;
     petTR.appendChild(petNameTD);
+  
 
     let petLegsTD = document.createElement("td");
     petLegsTD.textContent = this.legs;
@@ -29,13 +32,18 @@ class Animal {
     petTR.appendChild(petActionTD);
 
     petActionTDButton.onclick = this.action.bind(this);
-    petsTable.querySelector("tbody").appendChild(petTR)
+    petsTable.querySelector("tbody").appendChild(petTR);
   }
 
   showImage() {
     let imageShower = document.getElementById("imageWrapper");
-    // todo create image element 
-    // imageShower.appendChild(image element);
+    let imageElement = document.createElement("img");
+
+    imageElement.src="images/"+ this.image +".jpg"; 
+    imageShower.appendChild(imageElement);
+    imageElement.style.width = "100%";
+    // todo create image element +
+    // imageShower.appendChild(image element); +
   }
 }
 
@@ -53,6 +61,8 @@ class Monkey extends Animal {
 
 let mila = new Cat("Mila");
 mila.putInTheDocument();
+object.addEventListener("click", showImage);
+
 
 let charlie = new Monkey("Charlie");
 charlie.putInTheDocument();
