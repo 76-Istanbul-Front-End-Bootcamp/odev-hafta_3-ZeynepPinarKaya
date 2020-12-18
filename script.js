@@ -1,55 +1,69 @@
-function Animal(name){
-    this.name = name;
-}
+class Animal {
+  constructor(name,legs, actionText, actionSoundName, image) {
+    this.name=name;
+    this.legs = legs;
+    this.actionText = actionText;
+    this.actionSoundName = actionSoundName;
+    this.image = image;
+  }
 
-Animal.prototype.action = function(){
-  document.getElementById(this.actionSoundName).play();
-  
-}
+  action() {
+    document.getElementById(this.actionSoundName).play();
+  }
 
-Animal.prototype.putInTheDocument = function(){
-    var petsTable = document.getElementById("petsTable");
-    var petTR = document.createElement("tr");
-  
-    var petNameTD = document.createElement("td");
+  putInTheDocument() {
+    let petsTable = document.getElementById("petsTable");
+    let petTR = document.createElement("tr");
+    petTR.className="petRows";
+    petTR.onclick = this.showImage.bind(this);
+
+
+    let petNameTD = document.createElement("td");
     petNameTD.textContent = this.name;
     petTR.appendChild(petNameTD);
-  
-    var petLegsTD = document.createElement("td");
+
+    let petLegsTD = document.createElement("td");
     petLegsTD.textContent = this.legs;
     petTR.appendChild(petLegsTD);
-  
-    var petActionTD = document.createElement("td");
-    var petActionTDButton = document.createElement("button");
+
+    let petActionTD = document.createElement("td");
+    let petActionTDButton = document.createElement("button");
     petActionTDButton.textContent = this.actionText;
     petActionTD.appendChild(petActionTDButton);
     petTR.appendChild(petActionTD);
-    
+
     petActionTDButton.onclick = this.action.bind(this);
-    petsTable.querySelector("tbody").appendChild(petTR)
+    petsTable.querySelector("tbody").appendChild(petTR);
+  }
+
+  showImage() {
+    let imageShower = document.getElementById("imageWrapper");
+    imageShower.innerHTML=null;
+    let imageElement = document.createElement("img");
+
+    imageElement.src="images/"+ this.image +".jpg"; 
+    imageShower.appendChild(imageElement);
+    imageElement.style.width = "100%";
+  }
 }
 
-
-function Cat(name){
-    Animal.call(this, name);
-    this.legs = 4;
-    this.actionText = "Meoow"
-    this.actionSoundName = "meow"
+class Cat extends Animal {
+  constructor(name) {
+    super(name, 4, "Meoow", "meow", "cat");
+  }
 }
 
-Cat.prototype = Animal.prototype;
-
-function Monkey(name){
-    Animal.call(this, name);
-    this.legs = 2;
-    this.actionText = "Scream";
-    this.actionSoundName = "scream";
+class Monkey extends Animal {
+  constructor(name) {
+    super(name, 2, "Scream", "scream", "monkey");
+  }
 }
 
-Monkey.prototype = Animal.prototype;
+let mila = new Cat("Mila");
+mila.putInTheDocument();
 
-var Mila = new Cat("Mila");
-Mila.putInTheDocument();
 
-var Charlie = new Monkey("Charlie");
-Charlie.putInTheDocument();
+let charlie = new Monkey("Charlie");
+charlie.putInTheDocument();
+
+
