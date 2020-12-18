@@ -61,7 +61,6 @@ class Monkey extends Animal {
 
 let mila = new Cat("Mila");
 mila.putInTheDocument();
-object.addEventListener("click", showImage);
 
 
 let charlie = new Monkey("Charlie");
